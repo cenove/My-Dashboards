@@ -1,6 +1,10 @@
+<img width="1037" height="587" alt="image" src="https://github.com/user-attachments/assets/1deb56b8-5c33-46b8-b40d-8e2a2b164b6b" />
+
 🎯 Technical & Business Highlights
 
 1. Data Modeling (Star Schema)
+
+<img width="687" height="581" alt="image" src="https://github.com/user-attachments/assets/c0d1f956-32cd-4338-8135-7e2a0131c7e7" />
 
 Robust data structuring, transforming a flat file into a dimensional model:
 
