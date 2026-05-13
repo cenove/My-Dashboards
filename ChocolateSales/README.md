@@ -18,6 +18,9 @@ An end-to-end Business Intelligence project analyzing chocolate sales performanc
 2. **Data Warehousing (SQL Server & SSMS):**
    * Designed and deployed a relational database inside **SQL Server Management Services (SSMS)**.
    * Imported the structured CSVs to maintain data persistence, integrity, and enable optimized query extractions.
+
+<img width="1280" alt="Star Schema Data Model" src=".asset/sql_diagram.png" />
+
 3. **Data Modeling (Star Schema):**
    * Structured a robust dimensional model within Power BI to optimize performance and cross-filtering integrity.
 
@@ -44,9 +47,13 @@ for sheet_name, df in all_sheets.items():
         print(f"Found Date column in {sheet_name}")
         df['purchase_date'] = pd.to_datetime(df['purchase_date'])
     
-    # Save the CSV as you were doing
+    # Save the CSV
     df.to_csv(f'{sheet_name}.csv', index=False)
 ```
+
+The code above is very simple to explain: 
+1. About the first two lines I'm determining the path to the file (file_path), since I wanted to get only one file I simply took the path to the file, but my original plan was to list every file and then allow the user to write down which one it want.
+2. You will see that inside the def there's an if that check if a column called purchase_date exist, it's because the file from Kaggle came with the purchase_date column as mm/dd/yyyy which doesn't work well inside SSMS. If yes than I added a warning saying it found and start to change to yyyy-mm-dd which is perfect for the SSMS
 
 ## 🎯 Technical & Business Highlights
 
