@@ -2,7 +2,7 @@
 Hello!! It's a pleasure to see you here.
 Here you can find all the dashboards I did throughout all my life as a future Data Analyst:
 
-[Chocolate Sales](https://github.com/cenove/My-Dashboards/tree/c38e0a30656c991a8e044fc8f3c9f29367848452/ChocolateSales)
+[Chocolate Sales](https://github.com/cenove/My-Dashboards/tree/0db766bb6a8ad1b772ac3723843b6ce7b5c946b8/ChocolateSales)
 _The focus of that dashboard, is to understand which chocolate is giving the best revenue for the company_
 
 [Youtube Tech Channels Engagement Rate Analysis](https://github.com/cenove/My-Dashboards/tree/f0171695062ea3ecee22452891fd1ea55da4b9e4/Youtube%20Tech%20Channels%20ER)
