@@ -1,0 +1,22 @@
+relationship f770a4c1-34b2-47b7-8f34-c66835b3892c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dCalendar.Date
+	toColumn: LocalDateTable_72d05497-1cc4-410f-a8dc-fdd3edfd0c2d.Date
+
+relationship 0123e463-8889-de49-3252-e71a62d910e7
+	fromColumn: fSRO_Analysis.StatusRegulador_ID
+	toColumn: dStatus_Regulador.Index
+
+relationship 862a6b5c-b5d7-975e-d27f-ec79f9e6d438
+	fromColumn: fSRO_Analysis.TipoSeguro_ID
+	toColumn: dTipo_Seguro.Index
+
+relationship 8d5b2f62-8a4c-88eb-f74b-abc86df2a698
+	fromColumn: fSRO_Analysis.'Data Final'
+	toColumn: dCalendar.Date
+
+relationship fd254c74-dd46-99db-9f1d-ed34715eddbd
+	isActive: false
+	fromColumn: fSRO_Analysis.'Data Início'
+	toColumn: dCalendar.Date
+

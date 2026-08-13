@@ -1,0 +1,42 @@
+table dStatus_Regulador
+	lineageTag: c54d269d-d389-4049-b958-e6c28539a726
+
+	column 'Status Regulador'
+		dataType: string
+		lineageTag: a0dc1951-e0ea-4341-8aa5-5be390ec6347
+		summarizeBy: none
+		sourceColumn: Status Regulador
+
+		annotation SummarizationSetBy = Automatic
+
+	column Index
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b940fa6-6610-4c1c-8c53-d7b420f79b64
+		summarizeBy: none
+		sourceColumn: Index
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dStatus_Regulador = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("DESKTOP-FLUALF9"),
+				    STAGE_SRO_VALIDATION = Source{[Name="STAGE_SRO_VALIDATION"]}[Data],
+				    dbo_SRO_Analysis = STAGE_SRO_VALIDATION{[Schema="dbo",Item="SRO_Analysis"]}[Data],
+				    #"Replaced Value" = Table.ReplaceValue(dbo_SRO_Analysis,"Processado com Sucesso","Sucesso",Replacer.ReplaceText,{"claim_status"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Rejeitado por Erro Cadastral","Erro Cadastral",Replacer.ReplaceText,{"claim_status"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Replaced Value1",{{"police_id", "Apólice ID"}, {"insurance_type", "Tipo de Seguro"}, {"start_date", "Data Início"}, {"end_date", "Data Final"}, {"premium_account", "Valor Prémio"}, {"coverage_amount", "Valor Segurado"}, {"client_cpf", "CPF Cliente"}, {"claim_status", "Status Regulador"}}),
+				    #"Status Regulador1" = #"Renamed Columns"[Status Regulador],
+				    #"Converted to Table" = Table.FromList(#"Status Regulador1", Splitter.SplitByNothing(), null, null, ExtraValues.Error),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Converted to Table",{{"Column1", "Status Regulador"}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Renamed Columns1"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type)
+				in
+				    #"Added Index"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

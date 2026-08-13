@@ -1,0 +1,62 @@
+table dCalendar
+	lineageTag: 7be55c4b-4000-4be3-b8a1-e5d26525e879
+
+	column Date
+		formatString: dd/mm/yyyy
+		lineageTag: 6bb61a94-ae6a-4bf4-8d95-1e63eb90f78e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: f770a4c1-34b2-47b7-8f34-c66835b3892c
+			defaultHierarchy: LocalDateTable_72d05497-1cc4-410f-a8dc-fdd3edfd0c2d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Month = ```
+			MONTH(dCalendar[Date]) 
+			```
+		formatString: 0
+		lineageTag: 6f27332d-9a44-401c-89ff-e92d21aa21f8
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year = YEAR(dCalendar[Date])
+		formatString: 0
+		lineageTag: b57e530e-01ba-4234-b467-5d8cb57ab815
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day = DAY(dCalendar[Date])
+		formatString: 0
+		lineageTag: 7ddf5a28-0191-445f-976c-c73d5e70b5e2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthText = FORMAT(dCalendar[Month],"mmm")
+		lineageTag: 37948f6c-6319-4e16-b2e3-38e9d8d409a2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month/Year = FORMAT(dCalendar[Date],"mmm/YYYY")
+		lineageTag: 5c0b63dc-f0f0-4837-9796-1f715f239a95
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dCalendar = calculated
+		mode: import
+		source = ```
+				CALENDARAUTO() 
+				```
+
+	annotation PBI_Id = 4ef98fdcb7894e608d662d8ba6db7ea3
+

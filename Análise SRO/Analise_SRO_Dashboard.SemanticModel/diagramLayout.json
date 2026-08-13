@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 426.58795257357724,
+        "y": 194.83821517855347
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1473.9097156177916,
+            "y": 766.76656015595313
+          },
+          "nodeIndex": "dCalendar",
+          "nodeLineageTag": "7be55c4b-4000-4be3-b8a1-e5d26525e879",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1142.9819699699042,
+            "y": 227.67094092588547
+          },
+          "nodeIndex": "dStatus_Regulador",
+          "nodeLineageTag": "c54d269d-d389-4049-b958-e6c28539a726",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1141.7057726237463,
+            "y": 468.40606001727559
+          },
+          "nodeIndex": "dTipo_Seguro",
+          "nodeLineageTag": "76f704b7-f834-468a-86e7-ee9531d6a7d1",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1444.1638636698272,
+            "y": 233.66339663418663
+          },
+          "nodeIndex": "fSRO_Analysis",
+          "nodeLineageTag": "7b95b36b-ed28-4951-8276-292df9dcbfee",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1132.8394684029836,
+            "y": 650.894163827244
+          },
+          "nodeIndex": "CustomMeasures",
+          "nodeLineageTag": "602296ce-a744-4b3b-8a52-0362b9893046",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 79.55318203769987,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

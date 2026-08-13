@@ -1,0 +1,24 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["fSRO_Analysis","dStatus_Regulador","dTipo_Seguro"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table DateTableTemplate_3c5f423d-07c5-49df-af8c-4de271232d68
+ref table dCalendar
+ref table LocalDateTable_72d05497-1cc4-410f-a8dc-fdd3edfd0c2d
+ref table fSRO_Analysis
+ref table dStatus_Regulador
+ref table dTipo_Seguro
+ref table CustomMeasures
+
+ref cultureInfo en-US
+

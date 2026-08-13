@@ -1,0 +1,55 @@
+table CustomMeasures
+	lineageTag: 602296ce-a744-4b3b-8a52-0362b9893046
+
+	measure Clientes_Unicos = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(fSRO_Analysis[CPF Cliente]),
+			    fSRO_Analysis[CPF Cliente] <> "CPF Não Informado"
+			)
+			
+			```
+		lineageTag: 751051fc-1766-4fcc-9ff4-d9ea6b0b9287
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Media_Apolices_Reais = ```
+			
+			DIVIDE(
+			    CALCULATE(COUNT(fSRO_Analysis[Apólice ID]), fSRO_Analysis[CPF Cliente] <> "CPF Não Informado"), 
+			    [Clientes_Unicos]
+			)
+			
+			```
+		lineageTag: 25a00d32-1a8a-4cfd-95c0-124938d268a9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Taxa de Conversão Regulatória' =
+			DIVIDE(
+			    CALCULATE(
+			    COUNT(fSRO_Analysis[Apólice ID]),
+			    dStatus_Regulador[Status Regulador]= "Sucesso"
+			    ),
+			    COUNT(fSRO_Analysis[Apólice ID])
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 28df54e0-1908-4d3d-adcb-e47f555b7591
+
+	column Column
+		formatString: 0
+		lineageTag: 2b62f5f5-8575-4b75-b876-5e1afeb68186
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition CustomMeasures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 10831f65b42f47c8a06e2cfc98d34cc1
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

@@ -1,0 +1,125 @@
+table fSRO_Analysis
+	lineageTag: 7b95b36b-ed28-4951-8276-292df9dcbfee
+
+	column 'Apólice ID'
+		dataType: string
+		lineageTag: ecced902-284f-4a6a-99a6-d84cb921ff6b
+		summarizeBy: none
+		sourceColumn: Apólice ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Início'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 6c340626-1612-4500-8929-2b0bec7fed42
+		summarizeBy: none
+		sourceColumn: Data Início
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Data Final'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 7810498c-c3f7-4790-a314-342149c89ba3
+		summarizeBy: none
+		sourceColumn: Data Final
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Valor Prémio'
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: ac2aba2f-e906-49bb-8a3f-cd45d4d5ab7a
+		summarizeBy: sum
+		sourceColumn: Valor Prémio
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Valor Segurado'
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 44ff7ba8-7b61-4fb1-ba13-3e5aae1d77b1
+		summarizeBy: sum
+		sourceColumn: Valor Segurado
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'CPF Cliente'
+		dataType: string
+		lineageTag: 4080e22c-92b5-4909-8eb2-048e15361a07
+		summarizeBy: none
+		sourceColumn: CPF Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column StatusRegulador_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 4c87810e-8ac6-4bd0-9d5f-f04786c401fe
+		summarizeBy: none
+		sourceColumn: StatusRegulador_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column TipoSeguro_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: e36e1f94-2c8f-4bdd-b3ac-9c553ea9c7b5
+		summarizeBy: none
+		sourceColumn: TipoSeguro_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Vigência Inconsistente' = ```
+			
+			IF(
+			    fSRO_Analysis[Data Final] < fSRO_Analysis[Data Início], 
+			    "Inconsistente", 
+			    "Regular"
+			)
+			```
+		lineageTag: 20385a6d-7480-4138-a07f-ff17a2837529
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fSRO_Analysis = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Databases("DESKTOP-FLUALF9"),
+				    STAGE_SRO_VALIDATION = Source{[Name="STAGE_SRO_VALIDATION"]}[Data],
+				    dbo_SRO_Analysis = STAGE_SRO_VALIDATION{[Schema="dbo",Item="SRO_Analysis"]}[Data],
+				    #"Replaced Value" = Table.ReplaceValue(dbo_SRO_Analysis,"Processado com Sucesso","Sucesso",Replacer.ReplaceText,{"claim_status"}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","Rejeitado por Erro Cadastral","Erro Cadastral",Replacer.ReplaceText,{"claim_status"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Replaced Value1",{{"police_id", "Apólice ID"}, {"insurance_type", "Tipo de Seguro"}, {"start_date", "Data Início"}, {"end_date", "Data Final"}, {"premium_account", "Valor Prémio"}, {"coverage_amount", "Valor Segurado"}, {"client_cpf", "CPF Cliente"}, {"claim_status", "Status Regulador"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Status Regulador"}, dStatus_Regulador, {"Status Regulador"}, "dStatus_Regulador", JoinKind.LeftOuter),
+				    #"Expanded dStatus_Regulador" = Table.ExpandTableColumn(#"Merged Queries", "dStatus_Regulador", {"Index"}, {"dStatus_Regulador.Index"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Expanded dStatus_Regulador",{"Status Regulador"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"dStatus_Regulador.Index", "StatusRegulador_ID"}}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns1", {"Tipo de Seguro"}, dTipo_Seguro, {"Tipo Seguro"}, "dTipo_Seguro", JoinKind.LeftOuter),
+				    #"Expanded dTipo_Seguro" = Table.ExpandTableColumn(#"Merged Queries1", "dTipo_Seguro", {"Index"}, {"dTipo_Seguro.Index"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Expanded dTipo_Seguro",{{"dTipo_Seguro.Index", "TipoSeguro_ID"}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns2",{"Tipo de Seguro"}),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Removed Columns1", {{"Valor Prémio", Currency.Type}}, "pt-BR"),
+				    #"Changed Type with Locale1" = Table.TransformColumnTypes(#"Changed Type with Locale", {{"Valor Segurado", Currency.Type}}, "pt-BR")
+				in
+				    #"Changed Type with Locale1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
