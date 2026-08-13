@@ -10,3 +10,6 @@ _The main focus of that dashboard is to see the "Engagement Rate" of all the Tec
 
 [Financial Insights Dashboard](https://github.com/cenove/My-Dashboards/tree/b42445f35e6ea7f4c9dd172a84e26c90542475ab/Financial%20Insights%20Dashboard)
 _The main focus of that dashboard is to see the Sales, Estimation, most sold Product in different Segments._
+
+[SRO Analysis](https://github.com/cenove/My-Dashboards/tree/427303ec0f7d30a12ed1237f32aa285107ea04a6/An%C3%A1lise%20SRO)
+_The main focus of this dashboard** is to audit, sanitize, and analyze regulatory insurance data before its final submission to SUSEP's SRO (Sistema de Registro de Operações)._
