@@ -2,6 +2,9 @@
 Hello!! It's a pleasure to see you here.
 Here you can find all the dashboards I did throughout all my life as a future Data Analyst:
 
+[Engagement Dashboard](https://github.com/cenove/My-Dashboards/tree/e962a6008e3b3f71b2bc2960db1c8e99d767c63a/Engagement%20Dashboard)
+_That dashboard will show you everything about clients, showing you how they interact and how active they are in a social media_
+
 [Chocolate Sales](https://github.com/cenove/My-Dashboards/tree/0db766bb6a8ad1b772ac3723843b6ce7b5c946b8/ChocolateSales)
 _The focus of that dashboard, is to understand which chocolate is giving the best revenue for the company_
 
