@@ -1,5 +1,0 @@
-relationship a05345b7-1cc8-44f6-b03e-b430f110bfeb
-	joinOnDateBehavior: datePartOnly
-	fromColumn: MarketingData.Data_Cadastro
-	toColumn: LocalDateTable_94ca4567-052b-4c05-9e22-1039c9d99b44.Date
-
