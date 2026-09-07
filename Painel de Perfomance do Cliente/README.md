@@ -1,4 +1,4 @@
-# Dashboard de Compliance Regulatório e Saneamento SRO (SUSEP)
+# Painel de Performance do Cliente
 
 <img width="1046" alt="Compliance e Riscos" src=".asset/DashCliente.png" />
 
