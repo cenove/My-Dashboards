@@ -3,7 +3,7 @@ Hello!! It's a pleasure to see you here.
 Here you can find all the dashboards I did throughout all my life as a future Data Analyst:
 
 
-[Client Performance Panel](https://github.com/cenove/My-Dashboards/tree/1b486668924b967cce85be0c66bf23191a2793aa/Client%20Performance%20Panel)
+[Client Performance Panel](https://github.com/cenove/My-Dashboards/tree/8ec9cf13a2e2de4c6e368fd362bba306b5490df6/Painel%20de%20Perfomance%20do%20Cliente)
 _That dashboard will show you an analyze I did to understand how our clients reacted to our campaigns_
 
 [Retention and Interaction Dashboard](https://github.com/cenove/My-Dashboards/tree/cfc1bf7c49c8fbfad751043a56bcb459049eb127/Retention%20and%20Interaction%20Dashboard)
