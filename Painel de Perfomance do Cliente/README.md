@@ -47,7 +47,7 @@ Como foco em otimização e performance do dashboard eu acabei juntando as colun
 O layout do dashboard segue uma hierarquia de informação executiva:
 
 <img width="800" alt="Página Visão Cliente" src=".asset/DashCliente.gif" />
-### 1. Página 1: Visão Cliente
+## 1. Página 1: Visão Cliente
 *   **Card Total de Clientes:** Monitora a nossa carteira atual de clientes contando todos os valores distintos.
 *   **Card Média do Salário Anual:** Aqui nós podemos ver quanto em média nossos clientes ganham anualmente.
 *   **Cards de Compras na Loja e Web:** Com esses Cards podemos monitorar como estamos de venda no e-commerce e em lojas físicas.
@@ -56,14 +56,15 @@ O layout do dashboard segue uma hierarquia de informação executiva:
 
 ---
 <img width="800" alt="Página Comportamento do Cliente" src=".asset/DashComporCliente.gif" />
-### 2. Página 2: Comportamento do Cliente
+## 2. Página 2: Comportamento do Cliente
 *   **Gráfico de Dispersão Total Gasto por Salário Anual:** Com esse gráfico podemos ver que os nossos clientes que mais gastam não necessariamente são os que mais ganham anualmente, além de poder saber que aqueles que mais gastam, nós podemos pegar esses clientes e preparar algum desconto.
 *   **Gráficos de Barras Crianças e Adolescentes por Gasto Anual:** Ambos apresentam o mesmo interesse, entender se os gasto por cada criança e adolescente são maiores ou menores, eu não misturei os dados para apresentar como um só, porque os clientes podem ter crianças abaixo dos 14 anos como também podem ter adolescentes.
 
 ---
 <img width="800" alt="Página Campanhas" src=".asset/DashCampanhas.gif" />
-### 3. Página 3: Auditoria e Saneamento de Dados
+## 3. Página 3: Auditoria e Saneamento de Dados
 *   **Gráfico de Barras Desempenho de Conversão de Campanhas:** Com esse gráfico podemos ver o quanto por cento quais clientes clicaram nas nossas campanhas, mas isso não quer dizer que compraram. A fórmula utilizada foi a seguinte:
+
 
 ```DAX
 Taxa de Conversão Geral = 
