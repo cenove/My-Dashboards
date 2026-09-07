@@ -2,7 +2,7 @@
 
 <img width="1046" alt="Compliance e Riscos" src=".asset/DashCliente.png" />
 
-Um projeto de Business Intelligence voltado para o setor de Marketing. O objetivo principal é analisar de como foi a recepção dos clientes pelas campanhas feitas, além disso, utilizando Big Query do Google Cloud para engenharia de qualidade de dados e Power BI para modelagem multidimensional (DAX).
+Um projeto de Business Intelligence voltado para o setor de Marketing. O objetivo principal é analisar como foi a recepção dos clientes pelas campanhas feitas, além disso, utilizando Big Query do Google Cloud para engenharia de qualidade de dados e Power BI para modelagem multidimensional (DAX).
 
 ---
 
@@ -14,7 +14,7 @@ Um projeto de Business Intelligence voltado para o setor de Marketing. O objetiv
 
 ## O Script SQL (Extração de Dados)
 
-O Script em SQL foi feito para selecionar as colunas conforme mencionado anteriormente, e extraír somente aquilo que iria ser utilizado na análise:
+O Script em SQL foi feito para selecionar as colunas conforme mencionado anteriormente, e extrair somente aquilo que iria ser utilizado na análise:
 
 ```SQL
 SELECT
@@ -38,7 +38,7 @@ FROM
 
 Marketing.Campaigns
 ```
-Como foco em otimização e performance do dashboard eu acabei juntando as colunas de valores de Gastos Total, além disso, consolidei o total de compras por cliente com excessão de número de compras com desconto, e por fim, consolidei as colunas das campanhas em apenas uma (Aceitou_Canpanha).
+Como foco em otimização e performance do dashboard nós acabei juntando as colunas de valores de Gastos Total, além disso, consolidei o total de compras por cliente com exceção de número de compras com desconto, e por fim, consolidei as colunas das campanhas em apenas uma (Aceitou_Campanha).
 
 ---
 
@@ -63,7 +63,7 @@ O layout do dashboard segue uma hierarquia de informação executiva:
 <img width="800" alt="Página Comportamento do Cliente" src=".asset/DashComporCliente.gif" />
 
 *   **Gráfico de Dispersão Total Gasto por Salário Anual:** Com esse gráfico podemos ver que os nossos clientes que mais gastam não necessariamente são os que mais ganham anualmente, além de poder saber que aqueles que mais gastam, nós podemos pegar esses clientes e preparar algum desconto.
-*   **Gráficos de Barras Crianças e Adolescentes por Gasto Anual:** Ambos apresentam o mesmo interesse, entender se os gasto por cada criança e adolescente são maiores ou menores, eu não misturei os dados para apresentar como um só, porque os clientes podem ter crianças abaixo dos 14 anos como também podem ter adolescentes.
+*   **Gráficos de Barras Crianças e Adolescentes por Gasto Anual:** Ambos apresentam o mesmo interesse, entender se os gastos por criança e adolescente são maiores ou menores, nós não misturamos os dados para apresentar como um só, porque os clientes podem ter crianças abaixo dos 14 anos como também podem ter adolescentes.
 
 ---
 
@@ -71,11 +71,11 @@ O layout do dashboard segue uma hierarquia de informação executiva:
 
 <img width="800" alt="Página Campanhas" src=".asset/DashCampanhas.gif" />
 
-*   **Gráfico de Barras Desempenho de Conversão de Campanhas:** Com esse gráfico podemos ver o quanto por cento quais clientes clicaram nas nossas campanhas, mas isso não quer dizer que compraram. A fórmula utilizada foi a seguinte:
+*   **Gráfico de Barras Desempenho de Conversão de Campanhas:** Com esse gráfico podemos ver a porcentagem de clientes que clicaram em nossas campanhas, mas isso não quer dizer que compraram. A fórmula utilizada foi a seguinte:
 
 
 ```DAX
-Taxa de Conversão Geral = 
+Taxa de Conversão Regulatória = 
 VAR TotalCompradores = 
     CALCULATE(
         COUNTA(MarketingData[Comprou]), 
@@ -94,7 +94,7 @@ RETURN
 ---
 ## Ferramentas & Tecnologias Utilizadas
 
-*   **Claude:** Foi utilizado o Claude para criação dos dados, utilizando da prática de engenharia de prompt.
+*   **Claude:** O Claude foi utilizado para a geração dos dados sintéticos por meio de engenharia de prompt.
 *   **DAX (Data Analysis Expressions):** Criação de métricas de negócio complexas como `Taxa de Conversão Regulatória`.
 *   **Power BI Desktop:** Modelagem de dados, engenharia de formatação condicional e visualização de dados.
 *   **Google Cloud:** Todos os dados estão registrados na Nuvem.
