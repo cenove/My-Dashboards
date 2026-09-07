@@ -46,8 +46,10 @@ Como foco em otimização e performance do dashboard eu acabei juntando as colun
 
 O layout do dashboard segue uma hierarquia de informação executiva:
 
-<img width="800" alt="Página Visão Cliente" src=".asset/DashCliente.gif" />
 ## 1. Página 1: Visão Cliente
+
+<img width="800" alt="Página Visão Cliente" src=".asset/DashCliente.gif" />
+
 *   **Card Total de Clientes:** Monitora a nossa carteira atual de clientes contando todos os valores distintos.
 *   **Card Média do Salário Anual:** Aqui nós podemos ver quanto em média nossos clientes ganham anualmente.
 *   **Cards de Compras na Loja e Web:** Com esses Cards podemos monitorar como estamos de venda no e-commerce e em lojas físicas.
@@ -55,14 +57,20 @@ O layout do dashboard segue uma hierarquia de informação executiva:
 *   **Gráfico de Barras por Estado Civil do Cliente:** Com esse gráfico podemos visualizar quais são os nossos clientes que mais compram de nós por estado civil, então, se for casado, podemos apresentar conteúdos com foco em relacionamento ou presentes, e até mesmo impulsionar mais nos dias dos namorados esses presentes sabendo que nossos clientes principais são casados.
 
 ---
-<img width="800" alt="Página Comportamento do Cliente" src=".asset/DashComporCliente.gif" />
+
 ## Página 2: Comportamento do Cliente
+
+<img width="800" alt="Página Comportamento do Cliente" src=".asset/DashComporCliente.gif" />
+
 *   **Gráfico de Dispersão Total Gasto por Salário Anual:** Com esse gráfico podemos ver que os nossos clientes que mais gastam não necessariamente são os que mais ganham anualmente, além de poder saber que aqueles que mais gastam, nós podemos pegar esses clientes e preparar algum desconto.
 *   **Gráficos de Barras Crianças e Adolescentes por Gasto Anual:** Ambos apresentam o mesmo interesse, entender se os gasto por cada criança e adolescente são maiores ou menores, eu não misturei os dados para apresentar como um só, porque os clientes podem ter crianças abaixo dos 14 anos como também podem ter adolescentes.
 
 ---
-<img width="800" alt="Página Campanhas" src=".asset/DashCampanhas.gif" />
+
 ## Página 3: Auditoria e Saneamento de Dados
+
+<img width="800" alt="Página Campanhas" src=".asset/DashCampanhas.gif" />
+
 *   **Gráfico de Barras Desempenho de Conversão de Campanhas:** Com esse gráfico podemos ver o quanto por cento quais clientes clicaram nas nossas campanhas, mas isso não quer dizer que compraram. A fórmula utilizada foi a seguinte:
 
 
