@@ -76,9 +76,9 @@ if __name__ == "__main__":
 ```
 Now explaining the code in parts:
 
-1. the first function works as a cleaner, since the xlsx file is already well cleaned I just change the way the column purchase_data will be assigned leaving for pandas to determine what is the format of the column by using the parameter format='mixed';
+1. the first function works as a cleaner, since the `.xlsx` file is already well cleaned I just change the way the `column purchase_data` will be assigned leaving for pandas to determine what is the format of the column by using the parameter `format='mixed'`;
 2. Then, the function to_sql_loader is where we define the parameters and engine to access the server, only then, it will insert the dataframe into the database;
-3. Lastly, the main function is where all the work is done. It will get all the .xlsx inside the folder and transform all of them into csv files, clean them all, and only then send to the database. All that process is done specially because of the pipe() where it works as a pipeline already.
+3. Lastly, the main function is where all the work is done. It will get all the `.xlsx` inside the folder and transform all of them into `.csv` files, clean them all, and only then send to the database. All that process is done specially because of the pipe() where it works as a pipeline already.
 
 ## 🎯 Technical & Business Highlights
 
