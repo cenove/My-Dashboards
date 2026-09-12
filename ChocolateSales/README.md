@@ -32,28 +32,53 @@ An end-to-end Business Intelligence project analyzing chocolate sales performanc
 ---
 ## The Python Script
 
-It's not something so advanced as it may seen. Mostly the code is simple because there's only one purpose:
+I created that script to run with anything, so, if you need to add multiples csv files inside a single table in a database, or if you want to add different csv files in different tables in a database, you can. The only problem is, the csv file must be the same name as the table:
 
 ```python
 import pandas as pd
+from sqlalchemy import create_engine
+import urllib
+import urllib.parse
+import os
 
-file_path = r'C:\Users\Isdras\Documents\My Dashboards\ChocolateSales\Chocolate Sales.xlsx'
-all_sheets = pd.read_excel(file_path, sheet_name=None)
+pasta = os.path.join('.', 'files')
 
-for sheet_name, df in all_sheets.items():
-    # Check if Date exists 
-    if 'purchase_date' in df.columns:
-        date_data = df['purchase_date']
-        print(f"Found Date column in {sheet_name}")
-        df['purchase_date'] = pd.to_datetime(df['purchase_date'])
-    
-    # Save the CSV
-    df.to_csv(f'{sheet_name}.csv', index=False)
+def df_cleaner(df):
+        df['purchase_date'] = pd.to_datetime(df['purchase_date'], format='mixed', errors='coerce')
+        return df
+
+# If you are going to test the pipeline, dont forget to change the parameters
+def to_sql_loader(df, table_name):
+    params = urllib.parse.quote_plus(
+    'DRIVER={Usually is ODBC Driver 17 for SQL Server};'
+    'SERVER=server_name;'
+    'DATABASE=database_name;'
+    'Trusted_Connection=yes;'
+    'TrustServerCertificate=yes;'
+)
+    engine = create_engine(f"mssql+pyodbc:///?odbc_connect={params}")
+    df.to_sql(table_name, con=engine, if_exists='append', index=False)
+    return df
+
+def main():
+    for nome_arquivo in os.listdir(pasta):
+        if nome_arquivo.endswith('.xlsx'):
+            file_path = os.path.join(pasta, nome_arquivo)        
+            all_sheets = pd.read_excel(file_path, sheet_name=None)
+            for sheet_name, nome_arquivo in all_sheets.items():
+                pipeline = (
+                    nome_arquivo.pipe(df_cleaner)
+                    .pipe(to_sql_loader, sheet_name)
+                )
+
+if __name__ == "__main__":
+    main()
 ```
+Now explaining the code in parts:
 
-The code above is very simple to explain: 
-1. About the first two lines I'm determining the path to the file (file_path), since I wanted to get only one file I simply took the path to the file, but my original plan was to list every file and then allow the user to write down which one it want.
-2. You will see that inside the def there's an if that check if a column called purchase_date exist, it's because the file from Kaggle came with the purchase_date column as mm/dd/yyyy which doesn't work well inside SSMS. If yes than I added a warning saying it found and start to change to yyyy-mm-dd which is perfect for the SSMS
+1. the first function works as a cleaner, since the xlsx file is already well cleaned I just change the way the column purchase_data will be assigned leaving for pandas to determine what is the format of the column by using the parameter format='mixed';
+2. Then, the function to_sql_loader is where we define the parameters and engine to access the server, only then, it will insert the dataframe into the database;
+3. Lastly, the main function is where all the work is done. It will get all the .xlsx inside the folder and transform all of them into csv files, clean them all, and only then send to the database. All that process is done specially because of the pipe() where it works as a pipeline already.
 
 ## 🎯 Technical & Business Highlights
 
