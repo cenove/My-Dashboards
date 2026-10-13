@@ -1,20 +1,20 @@
-# Painel de Performance do Cliente
+# Client Performance Panel
 
 <img width="1046" alt="Compliance e Riscos" src=".asset/DashCliente.png" />
 
-Um projeto de Business Intelligence voltado para o setor de Marketing. O objetivo principal é analisar como foi a recepção dos clientes pelas campanhas feitas, além disso, utilizando Big Query do Google Cloud para engenharia de qualidade de dados e Power BI para modelagem multidimensional (DAX).
+A Business Intelligence project aimed at the marketing sector. The main objective is to analyze how was the clients' reception for the campaigns done, and utilizing Big Query by Google Cloud fdata quality engineering and Power BI for multidimensional modeling (DAX).
 
 ---
 
-## Arquitetura Utilizada
+## Architecture Overview
 
 ```text
 [Big Query] ➔ [Script SQL para ter as colunas das campanhas] ➔ [Dashboard no Power BI]
 ```
 
-## O Script SQL (Extração de Dados)
+## The SQL Script (Data Extraction)
 
-O Script em SQL foi feito para selecionar as colunas conforme mencionado anteriormente, e extrair somente aquilo que iria ser utilizado na análise:
+The SQL script was designed to select the columns as previously mentioned, extracting only the data required for the analysis:
 
 ```SQL
 SELECT
@@ -38,40 +38,40 @@ FROM
 
 Marketing.Campaigns
 ```
-Como foco em otimização e performance do dashboard nós acabei juntando as colunas de valores de Gastos Total, além disso, consolidei o total de compras por cliente com exceção de número de compras com desconto, e por fim, consolidei as colunas das campanhas em apenas uma (Aceitou_Campanha).
+Focusing on dashboard optimization and performance, I consolidated the `Total_Compras` columns. Additionally, I aggregated the total number of purchases per customer—excluding the number of discounted purchases—and finally, unpivoted the marketing campaign columns into a single dimension `Aceitou_Campanha`
 
 ---
 
-## Destaques Técnicos & de Negócio
+## Technical & Business Highlights
 
-O layout do dashboard segue uma hierarquia de informação executiva:
+The dashboard layout follows an executive information hierarchy:
 
-## 1. Página 1: Visão Cliente
+## 1. Page 1: Customer Overview
 
-<img width="800" alt="Página Visão Cliente" src=".asset/DashCliente.gif" />
+<img width="800" alt="Customer Overview" src=".asset/DashCliente.gif" />
 
-*   **Card Total de Clientes:** Monitora a nossa carteira atual de clientes contando todos os valores distintos.
-*   **Card Média do Salário Anual:** Aqui nós podemos ver quanto em média nossos clientes ganham anualmente.
-*   **Cards de Compras na Loja e Web:** Com esses Cards podemos monitorar como estamos de venda no e-commerce e em lojas físicas.
-*   **Gráfico de Barras Escolaridade do Cliente:** Esse gráfico serve especificamente para sabermos sobre a escolaridade do cliente, dependendo podemos direcionar conteúdos com maiores valores e vice-versa.
-*   **Gráfico de Barras por Estado Civil do Cliente:** Com esse gráfico podemos visualizar quais são os nossos clientes que mais compram de nós por estado civil, então, se for casado, podemos apresentar conteúdos com foco em relacionamento ou presentes, e até mesmo impulsionar mais nos dias dos namorados esses presentes sabendo que nossos clientes principais são casados.
-
----
-
-## Página 2: Comportamento do Cliente
-
-<img width="800" alt="Página Comportamento do Cliente" src=".asset/DashComporCliente.gif" />
-
-*   **Gráfico de Dispersão Total Gasto por Salário Anual:** Com esse gráfico podemos ver que os nossos clientes que mais gastam não necessariamente são os que mais ganham anualmente, além de poder saber que aqueles que mais gastam, nós podemos pegar esses clientes e preparar algum desconto.
-*   **Gráficos de Barras Crianças e Adolescentes por Gasto Anual:** Ambos apresentam o mesmo interesse, entender se os gastos por criança e adolescente são maiores ou menores, nós não misturamos os dados para apresentar como um só, porque os clientes podem ter crianças abaixo dos 14 anos como também podem ter adolescentes.
+*   **Total Customer Card:** Monitors the current customer base by calculating the distinct count of customer IDs.
+*   **Average Annual Salary Card:** Displays the average annual income of the customer base.
+*   **In-Store and Web Purchases Cards:** Tracks sales performance across e-commerce and physical retail channels.
+*   **Customer Education Bar Chart:** Segmenting customers by education level allows for targeted marketing strategies, tailoring high-ticket offers to specific demographics.
+*   **Customer Marital Status Bar Chart:** Visualizes purchase behavior across different marital statuses. For instance, a high concentration of married customers enables targeted campaigns focused on relationships, family gifts, or optimized ad spend during Valentine's Day.
 
 ---
 
-## Página 3: Auditoria e Saneamento de Dados
+## Page 2: Customer Behavior
 
-<img width="800" alt="Página Campanhas" src=".asset/DashCampanhas.gif" />
+<img width="800" alt="Customer Behavior" src=".asset/DashComporCliente.gif" />
 
-*   **Gráfico de Barras Desempenho de Conversão de Campanhas:** Com esse gráfico podemos ver a porcentagem de clientes que clicaram em nossas campanhas, mas isso não quer dizer que compraram. A fórmula utilizada foi a seguinte:
+*   **Total Spend vs. Annual Salary Scatter Plot:** This chart demonstrates that high-spending customers do not necessarily correlate with the highest annual incomes. Identifying this behavior allows for targeted promotional strategies and loyalty discounts aimed at high-value segments.
+*   **Children and Teenagers vs. Annual Spend Bar Charts:** These charts analyze whether household composition (the presence of children or teenagers) influences annual spending patterns. The data streams were intentionally kept separate rather than aggregated, as households may concurrently include children under 14 and teenagers, each presenting distinct consumer behaviors.
+
+---
+
+## Page 3: Data Auditing & Sanitization
+
+<img width="800" alt="Data Auditing and Sanitization" src=".asset/DashCampanhas.gif" />
+
+*   **Campaign Conversion Performance Bar Chart:** This visual tracks the percentage of customers who engaged with or accepted the marketing campaigns (note: engagement does not inherently imply a completed purchase). The metric was calculated using the following formula:
 
 
 ```DAX
@@ -87,18 +87,18 @@ RETURN
 
 ```
 
-*   **Gráfico de Rosca Resultado das Campanhas:** Com esse gráfico de rosca podemos ver quantas pessoas compraram e quantas pessoas não compraram, assim podendo ver quais são os clientes que fizeram todo o processo.
-*   **Tabela Compras dos Clientes:** Com essa tabela podemos ver quais foram os clientes que mais compraram, se eles são casados e qual o grau de estudos deles, e também ver aqueles que não compraram. Lembrando que não necessariamente aqueles que não compraram não foram afetados pela campanha.
-*   **Gráfico de Barras Média de Salário por Resultado das Campanhas:** E por fim, nós podemos ver os clientes que compraram ou não a partir da média de salários.
+*   **Campaign Results Donut Chart:** Visualizes the breakdown between converting and non-converting customers, allowing stakeholders to identify the exact volume of customers who completed the entire conversion funnel.
+*   **Customer Purchases Table:** Provides a granular view of top-performing customers alongside demographic dimensions such as marital status and education level, while also highlighting non-purchasing profiles. Note that non-purchasing customers may still have been influenced by the campaign touchpoints.
+*   **Average Salary by Campaign Result Bar Chart:** Analyzes the relationship between average household income and campaign conversion outcomes.
 
 ---
-## Ferramentas & Tecnologias Utilizadas
+## Tools & Technologies Used
 
-*   **Claude:** O Claude foi utilizado para a geração dos dados sintéticos por meio de engenharia de prompt.
-*   **DAX (Data Analysis Expressions):** Criação de métricas de negócio complexas como `Taxa de Conversão Regulatória`.
-*   **Power BI Desktop:** Modelagem de dados, engenharia de formatação condicional e visualização de dados.
-*   **Google Cloud:** Todos os dados estão registrados na Nuvem.
+*   **Claude:** Utilized for synthetic data generation through advanced prompt engineering techniques.
+*   **DAX (Data Analysis Expressions):** Deployed for developing complex business metrics and KPIs, such as the `Conversion Rate`.
+*   **Power BI Desktop:** Used for data modeling, advanced conditional formatting engineering, and data visualization.
+*   **Google Cloud (GCP):** Acts as the data repository, ensuring all datasets are securely stored and managed in the cloud.
 ---
 
-## Desenvolvedor
+## Developer
 *   **Diogo Oliveira**
