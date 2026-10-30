@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Análise de Carteiras de Investimentos"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "678b0fb1-c2f6-409a-999b-8aa42e809650"
+  }
+}

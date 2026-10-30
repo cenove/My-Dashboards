@@ -1,0 +1,25 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Clientes","Carteiras","Bankers","Movimentacoes"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Clientes
+ref table DateTableTemplate_0c877e4d-2403-43d2-b5ab-c6c3f5e357a2
+ref table Carteiras
+ref table Bankers
+ref table Movimentacoes
+ref table Métricas
+ref table Calendário
+ref table LocalDateTable_508852f0-9a5f-40ed-8666-a32d2786244d
+
+ref cultureInfo en-US
+

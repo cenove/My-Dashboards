@@ -1,0 +1,85 @@
+table Métricas
+	lineageTag: e9ca2764-8753-40cb-b308-ff581138945e
+
+	measure 'Captação Líquida' =
+			
+			VAR TotalAplicacoes =
+			    CALCULATE(
+			        SUM(Movimentacoes[Valor]),
+			        Movimentacoes[Tipo de Movimentação] = "Aplicação",
+			        Movimentacoes[Status da Movimentação] = "Concluída"
+			    )
+			
+			VAR TotalResgates =
+			    CALCULATE(
+			        SUM(Movimentacoes[Valor]),
+			        Movimentacoes[Tipo de Movimentação] = "Resgate",
+			        Movimentacoes[Status da Movimentação] = "Concluída"
+			    )
+			
+			RETURN
+			    TotalAplicacoes - TotalResgates
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: 211a9abf-00a8-4851-929b-a8d74e9ecd48
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total Aplicacoes' =
+			
+			CALCULATE(
+			    SUM(Movimentacoes[Valor]),
+			    Movimentacoes[Tipo de Movimentação] = "Aplicação",
+			    Movimentacoes[Status da Movimentação] = "Concluída"
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 7e5ee663-13d4-42bb-a0a6-1a8db164389d
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Resgates' =
+			
+			CALCULATE(
+			    SUM(Movimentacoes[Valor]),
+			    Movimentacoes[Tipo de Movimentação] = "Resgate",
+			    Movimentacoes[Status da Movimentação] = "Concluída"
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 2c5f0034-bf83-4b39-a904-e38b0d351405
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total de Carteiras' = DISTINCTCOUNT(Carteiras[carteira_id])
+		formatString: 0
+		lineageTag: c0431ffa-1fa8-4766-91cc-b35b581b3065
+
+	measure 'Total de Clientes' = DISTINCTCOUNT(Clientes[Cliente])
+		formatString: 0
+		lineageTag: c1a19b7b-a077-42e5-98ca-c084f1d44dd0
+
+	measure 'Movimentações Concluídas' =
+			
+			CALCULATE(
+			    COUNTROWS(Movimentacoes),
+			    Movimentacoes[Status da Movimentação] = "Concluída"
+			)
+		formatString: 0
+		lineageTag: 12f24446-73a3-434d-9af7-365708ff0506
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 17c6c312-bfc2-4582-8c2a-091755805655
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Métricas = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 0a9208114db84ff7b874acde9065deac
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

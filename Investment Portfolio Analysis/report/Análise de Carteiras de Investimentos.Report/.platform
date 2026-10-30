@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Análise de Carteiras de Investimentos"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "13f176c0-d33d-43ea-8334-d50dbdab76ce"
+  }
+}

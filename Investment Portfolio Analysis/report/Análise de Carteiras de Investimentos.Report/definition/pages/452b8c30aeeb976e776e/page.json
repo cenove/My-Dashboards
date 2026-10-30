@@ -1,0 +1,78 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
+  "name": "452b8c30aeeb976e776e",
+  "displayName": "Tipo de Movimentação & Valores por Bankers",
+  "displayOption": "ActualSize",
+  "height": 240,
+  "width": 320,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "9cf9780eda40bbae219c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Movimentacoes"
+              }
+            },
+            "Property": "Valor"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "fbbd385a31d70ed72c0b",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Movimentacoes"
+              }
+            },
+            "Property": "Tipo de Movimentação"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "8b5deafc0a6e387da28d",
+    "type": "Tooltip",
+    "parameters": [
+      {
+        "name": "6913214b23e870ece7c8",
+        "boundFilter": "9cf9780eda40bbae219c",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Movimentacoes"
+              }
+            },
+            "Property": "Valor"
+          }
+        }
+      },
+      {
+        "name": "92368677ddeb6353598a",
+        "boundFilter": "fbbd385a31d70ed72c0b",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Movimentacoes"
+              }
+            },
+            "Property": "Tipo de Movimentação"
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode",
+  "type": "Tooltip"
+}

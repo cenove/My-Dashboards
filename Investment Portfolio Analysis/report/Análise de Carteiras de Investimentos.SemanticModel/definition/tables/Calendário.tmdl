@@ -1,0 +1,56 @@
+table Calendário
+	lineageTag: d186c714-0de1-4f9a-a79a-29c9e8fbc896
+
+	column Date
+		formatString: dd/mm/yyyy
+		lineageTag: 3846bd5b-5a71-4a69-872f-68db9d38b930
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		variation Variation
+			isDefault
+			relationship: 51d75dc8-6ab8-49ae-8e2f-95c0cb77081a
+			defaultHierarchy: LocalDateTable_508852f0-9a5f-40ed-8666-a32d2786244d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Mês = FORMAT('Calendário'[Date],"MMM/yyyy","pt-BR")
+		lineageTag: 113d0b62-b8ba-49fb-9e9e-b958d3a4c564
+		summarizeBy: none
+		sortByColumn: NumeroMes
+
+		annotation SummarizationSetBy = Automatic
+
+	column NumeroMes = MONTH('Calendário'[Date])
+		isHidden
+		formatString: 0
+		lineageTag: efd1642d-de27-4abd-9f64-291e3eda6dca
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ano = YEAR([Date])
+		formatString: 0
+		lineageTag: 850f5762-dee2-4e65-96f9-893c606022e9
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column MêsAbreviado = FORMAT('Calendário'[Date],"MMM", "pt-BR")
+		lineageTag: a85a5453-72c8-42e2-8b2e-095aaf701a0e
+		summarizeBy: none
+		sortByColumn: NumeroMes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendário = calculated
+		mode: import
+		source = ```
+				CALENDARAUTO() 
+				```
+
+	annotation PBI_Id = d8f2de48db0d434093240cbf71a89713
+

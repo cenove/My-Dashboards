@@ -1,0 +1,82 @@
+table Carteiras
+	lineageTag: 95c36386-0fc4-4b6c-8824-5901dfed9596
+
+	column carteira_id
+		dataType: string
+		lineageTag: 08cc5404-a674-4979-9784-533433700e4d
+		summarizeBy: none
+		sourceColumn: carteira_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column cliente_id
+		dataType: string
+		lineageTag: 1a7c1d98-269a-4b4b-9869-da494bfe6393
+		summarizeBy: none
+		sourceColumn: cliente_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column banker_id
+		dataType: string
+		lineageTag: 84570b61-3dc0-4dc8-8455-b459f958b32b
+		summarizeBy: none
+		sourceColumn: banker_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data da Abertura'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 339d409c-2c1f-45b7-8dd9-27962f5d69e7
+		summarizeBy: none
+		sourceColumn: Data da Abertura
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Patrimônio Atual'
+		dataType: decimal
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: 3354a13f-5acb-4c4c-aeda-5ae319570aa8
+		summarizeBy: sum
+		sourceColumn: Patrimônio Atual
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column 'Status da Carteira'
+		dataType: string
+		lineageTag: 65d6c693-7fe3-4629-b26c-8a1fcd8ee991
+		summarizeBy: none
+		sourceColumn: Status da Carteira
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Produto Principal'
+		dataType: string
+		lineageTag: 29f3cc32-0935-4dce-af06-07ec0284ae8e
+		summarizeBy: none
+		sourceColumn: Produto Principal
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Carteiras = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Isdras\Documents\My Dashboards\investment_portfolio_analytics\dados_tratados\carteiras_limpos.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"carteira_id", type text}, {"cliente_id", type text}, {"banker_id", type text}, {"data_abertura", type date}, {"patrimonio_atual", type number}, {"status_carteira", type text}, {"produto_principal", type text}}),
+				    #"Changed Type with Locale" = Table.TransformColumnTypes(#"Changed Type", {{"data_abertura", type date}}, "pt-BR"),
+				    #"Changed Type with Locale1" = Table.TransformColumnTypes(#"Changed Type with Locale", {{"patrimonio_atual", Currency.Type}}, "pt-BR"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type with Locale1",{{"data_abertura", "Data da Abertura"}, {"patrimonio_atual", "Patrimônio Atual"}, {"produto_principal", "Produto Principal"}, {"status_carteira", "Status da Carteira"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
