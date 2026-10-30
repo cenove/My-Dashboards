@@ -8,7 +8,7 @@ O objetivo é demonstrar um fluxo prático de BI: gerar dados brutos, modelar os
 
 ### 1. Visão Executiva
 
-![Visão Executiva](asset/VisaoExecutiva.gif)
+![Visão Executiva](./asset/VisaoExecutiva.gif)
 
 Apresenta uma visão geral de clientes, patrimônio sob gestão, patrimônio médio por carteira, captação líquida, distribuição das carteiras por produto e movimentações ao longo do tempo.
 
