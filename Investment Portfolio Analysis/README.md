@@ -11,17 +11,25 @@ The goal is to demonstrate a practical BI workflow: generate clean data, model t
 
 ### 1. Executive Overview
 
+![Visão Executiva](asset/VisaoExecutiva.gif)
+
 Presents an overview of clients, assets under management, average assets per portfolio, net inflow, portfolio distribution by product, and transactions over time.
 
 ### 2. Banker Performance
+
+![Desempenho dos Bankers](asset/DesempenhodosBankers.gif)
 
 Compares Bankers by gross transaction volume, number of portfolios, and net inflow. The analysis by transaction type helps show the share of investments, redemptions, and transfers.
 
 ### 3. Clients and Portfolios
 
+![Clientes e Carteiras](asset/ClientesCarteira.gif)
+
 Explores the distribution of assets and clients by segment, the value of client portfolios, and the value of pending transactions.
 
 ### 4. Transaction Trends
+
+![Evolução das Movimentações](asset/EvolucaoMovimentacoes.gif)
 
 Tracks the volume of completed investments and redemptions, as well as net inflow over time. The charts help show general trends and investigate periods with positive or negative net inflow.
 
