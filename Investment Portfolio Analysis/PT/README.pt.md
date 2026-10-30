@@ -7,21 +7,25 @@ O objetivo é demonstrar um fluxo prático de BI: gerar dados brutos, modelar os
 ## Prévia do Dashboard
 
 ### 1. Visão Executiva
+
 ![Visão Executiva](.asset/VisaoExecutiva.gif)
 
 Apresenta uma visão geral de clientes, patrimônio sob gestão, patrimônio médio por carteira, captação líquida, distribuição das carteiras por produto e movimentações ao longo do tempo.
 
 ### 2. Desempenho dos Bankers
+
 ![Desempenho dos Bankers](.asset/DesempenhodosBankers.gif)
 
 Compara os Bankers por volume bruto de movimentações, quantidade de carteiras e captação líquida. A análise por tipo de movimentação ajuda a entender a participação de aplicações, resgates e transferências.
 
 ### 3. Clientes e Carteiras
+
 ![Clientes e Carteiras](.asset/ClientesCarteira.gif)
 
 Explora a distribuição do patrimônio e dos clientes por segmento, os valores das carteiras dos clientes e o valor das movimentações pendentes.
 
 ### 4. Evolução das Movimentações
+
 ![Evolução das Movimentações](.asset/EvolucaoMovimentacoes.gif)
 
 Acompanha o volume de aplicações e resgates concluídos, além da captação líquida ao longo do tempo. Os gráficos ajudam a observar tendências gerais e investigar períodos com captação líquida positiva ou negativa.
