@@ -1,8 +1,0 @@
-{
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.1.0/schema.json",
-  "name": "7254f5da36451b9deac6",
-  "displayName": "Clientes & Carteiras",
-  "displayOption": "FitToPage",
-  "height": 720,
-  "width": 1280
-}
