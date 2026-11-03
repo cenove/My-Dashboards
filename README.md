@@ -6,13 +6,7 @@ Here you can find all the dashboards I did throughout all my life as a future Da
 |Project |Description |Tools |Link |
 |:---|:---|:---|---:|
 |Client Performance Panel |That dashboard will show you an analyze to understand "How our clients reacted to our campaigns?" |BigQuery, Power BI |[Link](https://github.com/cenove/My-Dashboards/tree/8ec9cf13a2e2de4c6e368fd362bba306b5490df6/Painel%20de%20Perfomance%20do%20Cliente)|
-
-
-[Retention and Interaction Dashboard](https://github.com/cenove/My-Dashboards/tree/cfc1bf7c49c8fbfad751043a56bcb459049eb127/Retention%20and%20Interaction%20Dashboard)
-_That dashboard will show you everything about clients, showing you how they interact and how active they are in a social media_
-
-[Chocolate Sales Analytics Dashboard](https://github.com/cenove/My-Dashboards/tree/0db766bb6a8ad1b772ac3723843b6ce7b5c946b8/ChocolateSales)
-_The focus of that dashboard, is to understand which chocolate is giving the best revenue for the company_
+|Chocolate Sales Analytics Dashboard |The focus of that dashboard, is to understand "which Product is giving the best revenue for the company" |Excel, Python, Pandas, ETL, SSMS, Power BI, Star Schema |[Link](https://github.com/cenove/My-Dashboards/tree/0db766bb6a8ad1b772ac3723843b6ce7b5c946b8/ChocolateSales)|
 
 [Youtube Tech Channels Engagement Rate Analysis](https://github.com/cenove/My-Dashboards/tree/f0171695062ea3ecee22452891fd1ea55da4b9e4/Youtube%20Tech%20Channels%20ER)
 _The main focus of that dashboard is to see the "Engagement Rate" of all the Tech Channels, and give you the Top 5_
