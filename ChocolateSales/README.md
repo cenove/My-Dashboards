@@ -19,7 +19,109 @@ An end-to-end Business Intelligence project analyzing chocolate sales performanc
    * Designed and deployed a relational database inside **SQL Server Management Services (SSMS)**.
    * Imported the structured CSVs to maintain data persistence, integrity, and enable optimized query extractions.
 
-<img width="1280" alt="Star Schema Data Model" src=".asset/sql_diagram.png" />
+<img width="1280" alt="Database Diagram" src=".asset/sql_diagram.png" />
+
+#### 🔍 Data Quality Checks (SQL)
+
+Before building the Power BI model, I validated the loaded tables with T-SQL scripts that look for inconsistencies in the fact table (`Purchases`) and its dimensions (`Product`, `Country`, `SalesPerson`).
+
+| Check | What it detects | Result |
+|:---|:---|:---|
+| Duplicate keys | Repeated `purchase_id` values | 0.00 |
+| Null values | Nulls in `amount` and `product_id` | 0.00 |
+| Orphan keys | Sales pointing to a `product_id` that does not exist in `Product` | 0.00 |
+| Odd values | Null, zero, negative or extreme (>= 20,000,000) `amount` | 0.00 |
+
+<details>
+<summary><b>duplicate_checker.sql</b></summary>
+
+```sql
+-- Check if there is any duplicated value inside a key
+SELECT
+    purchase_id,
+    COUNT(*) AS qtd
+FROM dbo.Purchases
+GROUP BY purchase_id
+HAVING COUNT(*) > 1;
+```
+</details>
+
+<details>
+<summary><b>null_checker.sql</b></summary>
+
+```sql
+-- Check if there are null values inside important columns
+SELECT
+    SUM(CASE WHEN amount IS NULL THEN 1 ELSE 0 END) AS null_amount,
+    SUM(CASE WHEN product_id IS NULL THEN 1 ELSE 0 END) AS null_product
+FROM dbo.Purchases;
+```
+</details>
+
+<details>
+<summary><b>missing_product_checker.sql</b></summary>
+
+```sql
+-- Sales whose product_id does not exist in the Product dimension (orphan keys)
+SELECT pu.*
+FROM dbo.Purchases pu
+LEFT JOIN dbo.Product pr
+    ON pu.product_id = pr.product_id
+WHERE pr.product_id IS NULL
+  AND pu.product_id IS NOT NULL;
+```
+</details>
+
+<details>
+<summary><b>odd_values_checker.sql</b></summary>
+
+```sql
+-- Check odd values inside the amount column
+-- (20,000,000 is used as the outlier limit)
+SELECT
+    pu.purchase_id,
+    c.country_name,
+    pu.amount,
+    pu.boxes_shipped
+FROM dbo.Purchases pu
+LEFT JOIN dbo.Country c
+    ON c.country_id = pu.country_id
+WHERE pu.amount IS NULL
+   OR pu.amount <= 0
+   OR pu.amount >= 20000000;
+```
+</details>
+
+#### 📈 Analytical Query: Running Revenue by Salesperson
+
+Uses a window function to show the revenue after discount for each purchase and the cumulative revenue per salesperson. The discount rate is stored in a variable instead of being repeated in the query.
+
+<details>
+<summary><b>running_revenue_by_salesperson.sql</b></summary>
+
+```sql
+-- Revenue after discount per purchase and running total per salesperson.
+-- The discount is modeled as 1/3.5 of the sale amount (~28.6%).
+DECLARE @discount_divisor DECIMAL(5,2) = 3.5;
+
+SELECT
+    purchase_id,
+    sales_person_id,
+    purchase_date,
+    amount,
+    CAST(amount / @discount_divisor AS DECIMAL(18,2)) AS discount,
+    CAST(amount - (amount / @discount_divisor) AS DECIMAL(18,2)) AS revenue,
+    CAST(
+        SUM(amount - (amount / @discount_divisor)) OVER (
+            PARTITION BY sales_person_id
+            ORDER BY purchase_date, purchase_id
+            ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) AS DECIMAL(18,2)
+    ) AS running_revenue
+FROM dbo.Purchases;
+```
+</details>
+
 
 3. **Data Modeling (Star Schema):**
    * Structured a robust dimensional model within Power BI to optimize performance and cross-filtering integrity.
@@ -30,7 +132,7 @@ An end-to-end Business Intelligence project analyzing chocolate sales performanc
 *   **Dimension Tables:** `Product`, `Country`, `Sales_Person`, and a dynamic `Calendar` table created via DAX.
 
 ---
-## The Python Script
+## The Python Script - .xlsx to .csv
 
 I created that script to run with anything, so, if you need to add multiples csv files inside a single table in a database, or if you want to add different csv files in different tables in a database, you can. The only problem is, the csv file must be the same name as the table:
 
