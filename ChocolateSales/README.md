@@ -27,10 +27,10 @@ Before building the Power BI model, I validated the loaded tables with T-SQL scr
 
 | Check | What it detects | Result |
 |:---|:---|:---|
-| Duplicate keys | Repeated `purchase_id` values | 0.00 |
-| Null values | Nulls in `amount` and `product_id` | 0.00 |
-| Orphan keys | Sales pointing to a `product_id` that does not exist in `Product` | 0.00 |
-| Odd values | Null, zero, negative or extreme (>= 20,000,000) `amount` | 0.00 |
+| Duplicate keys | Repeated `purchase_id` values | 0.00s |
+| Null values | Nulls in `amount` and `product_id` | 1.50s |
+| Orphan keys | Sales pointing to a `product_id` that does not exist in `Product` | 0.00s |
+| Odd values | Null, zero, negative or extreme (>= 20,000,000) `amount` | 0.00s |
 
 <details>
 <summary><b>duplicate_checker.sql</b></summary>
